@@ -45,11 +45,12 @@ public class Turret : MonoBehaviour
 
             if (hit.collider != null)
             {
-                hasTarget = true;
+                
                 //check distance to enemy 
                 bool isInRange = hit.distance < turretFiringRadius;
                 if (hit.collider.gameObject.tag == "Enemy" && isInRange)
                 {
+                    hasTarget = true;
                     if (!isReloading)
                     {
                         Fire();
