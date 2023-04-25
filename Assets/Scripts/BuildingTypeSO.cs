@@ -13,5 +13,11 @@ public class BuildingTypeSO : ScriptableObject
     public string nameString;
     public BuildingName buildingName;
     public GameObject prefab;
+    public Projectile projectile;
     public Sprite sprite;
+    public float range = 5f;
+    public float reloadSpeed = 1f;
+    public float fov = 45f;
+    public float scanSpeed = 80f;
+    
 }

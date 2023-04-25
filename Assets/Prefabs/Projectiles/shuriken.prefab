@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firingSound: {fileID: 8300000, guid: f5cab24a2ca9ad44da93b38c80ad4503, type: 3}
+  damageAmount: 1
 --- !u!58 &5988378957436388346
 CircleCollider2D:
   m_ObjectHideFlags: 0

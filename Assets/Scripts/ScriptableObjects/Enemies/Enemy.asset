@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd4b3b8f4377d1c4ea2ca1aa7f04582f, type: 3}
   m_Name: Enemy
   m_EditorClassIdentifier: 
-  nameString: SquareTurret
+  nameString: Enemy
   buildingName: 3
   prefab: {fileID: 139361100855570992, guid: 05a80b025198afe4ca71cc9a083158eb, type: 3}
   sprite: {fileID: 0}

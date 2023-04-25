@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    // Move left and right 
+
+    BuildingTypeSO buildingType;
     Transform cannonTransform;
-    [SerializeField] float turretBarrelRotationSpeed = 4f;
-    [SerializeField] float turretFiringRadius = 4f;
     [SerializeField] float projectileSpeed = 5f;
-    [SerializeField] GameObject projectile;
     [SerializeField] float projectileLifetime = 0.5f;
-    [SerializeField] float reloadTimerMax = 1f;
-    [SerializeField] float fov = 45f;
     private Vector3 turretDirection;
     bool hasTarget = false;
     float reloadTimer;
@@ -21,22 +17,25 @@ public class Turret : MonoBehaviour
     private void Awake()
     {
         cannonTransform = transform.Find("cannon");
+        buildingType = GetComponent<BuildingTypeHolder>().buildingType;
 
     }
     private void Start()
     {
+        // Set the defaults depening on building type
+        
     }
 
     void OnDrawGizmos()
     {
         Gizmos.DrawRay(cannonTransform.position, cannonTransform.up);
-        Gizmos.DrawWireSphere(transform.position, turretFiringRadius);
+        Gizmos.DrawWireSphere(transform.position, buildingType.range);
     }
     private void ScanForTarget()
     {
         if (!hasTarget)
         {
-            turretDirection = new Vector3(0, 0, Mathf.PingPong(Time.time * turretBarrelRotationSpeed, fov) - (fov / 2));
+            turretDirection = new Vector3(0, 0, Mathf.PingPong(Time.time * buildingType.scanSpeed, buildingType.fov) - (buildingType.fov / 2));
             cannonTransform.localEulerAngles = turretDirection;
         }
         if (cannonTransform != null)
@@ -47,7 +46,12 @@ public class Turret : MonoBehaviour
             {
                 
                 //check distance to enemy 
-                bool isInRange = hit.distance < turretFiringRadius;
+                bool isInRange = hit.distance < buildingType.range;
+
+                // No target if not in range
+                if(!isInRange) {
+                    hasTarget = false;
+                }
                 if (hit.collider.gameObject.tag == "Enemy" && isInRange)
                 {
                     hasTarget = true;
@@ -72,14 +76,18 @@ public class Turret : MonoBehaviour
         Transform muzzle = transform.Find("cannon").Find("muzzle");
         // Instantiate bullet pf from projectile transform point
         Debug.Log(muzzle);
-        Projectile bullet = Instantiate(projectile, muzzle).GetComponent<Projectile>();
+        Projectile bullet = Instantiate(buildingType.projectile, muzzle).GetComponent<Projectile>();
 
+        if(bullet == null) {
+            Debug.Log("No projectile found");
+        }
+    
         // Add force in direction of the cannonTransform up vector
         bullet.GetComponent<Rigidbody2D>().AddForce(cannonTransform.up * projectileSpeed);
         // Destroy after specified lifetime
         bullet.Die(projectileLifetime);
         //reload 
-        reloadTimer += reloadTimerMax;
+        reloadTimer += buildingType.reloadSpeed;
         isReloading = true;
         
     }

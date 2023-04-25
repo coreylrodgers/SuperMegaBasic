@@ -179,6 +179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1239923184918638140}
   - component: {fileID: 8431721267785955953}
+  - component: {fileID: -8858107156078894415}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -222,6 +223,19 @@ MonoBehaviour:
   projectileLifetime: 1
   reloadTimerMax: 1
   fov: 45
+--- !u!114 &-8858107156078894415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4957347017579803320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61e1241d81dd7cc45bae928b6e5fe327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingType: {fileID: 11400000, guid: 52565cbba4c8c0244be92e61aa02f73d, type: 2}
 --- !u!1 &4981111655840432479
 GameObject:
   m_ObjectHideFlags: 0

@@ -83,5 +83,24 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9137255
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -8858107156078894415, guid: 19fe55bec64ba344ebf0438669b265b1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 19fe55bec64ba344ebf0438669b265b1, type: 3}
+--- !u!1 &5131073818636559689 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4957347017579803320, guid: 19fe55bec64ba344ebf0438669b265b1, type: 3}
+  m_PrefabInstance: {fileID: 286317961416546289}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-8308279418589613338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5131073818636559689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61e1241d81dd7cc45bae928b6e5fe327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingType: {fileID: 11400000, guid: 1ca772a4cc089d44698b754f8389ccab, type: 2}

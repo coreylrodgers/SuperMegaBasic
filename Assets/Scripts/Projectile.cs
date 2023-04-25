@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
 {
     AudioSource audioSource;
     [SerializeField] AudioClip firingSound;
+    [SerializeField] float damageAmount;
     // Start is called before the first frame update
     void Awake() {
 
@@ -19,12 +20,6 @@ public class Projectile : MonoBehaviour
         PlayFiringSound();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // Travel 
-    }
-    
     public void PlayFiringSound() {
         //Set random pitch
         float pitch = Random.Range(1, 1.1f);
@@ -35,6 +30,20 @@ public class Projectile : MonoBehaviour
 
     public void Die(float projectileLifeTime) {
         Destroy(this.gameObject, projectileLifeTime);
+    }
+
+    private void DealDamage(float damageAmount) {
+    
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        // Deal Damage to enemy
+        if(collision.gameObject.TryGetComponent<Enemy>(out Enemy enemyComponent)) {
+            Debug.Log(collision + " enemy");
+            enemyComponent.TakeDamage(damageAmount);
+        }
+
+        Destroy(gameObject);
     }
 
  
