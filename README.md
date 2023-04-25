@@ -1,3 +1,3 @@
 # SuperMegaBasic
 Tower Defense Hobby Project
-![SuperMegaBasic2](https://user-images.githubusercontent.com/55216797/234068361-7b22d886-1c00-47e8-9fc2-0241289627fc.gif)
+![SuperMegaBasic3](https://user-images.githubusercontent.com/55216797/234302145-ef40a233-2908-4998-955e-1ff2a0978fad.gif)
