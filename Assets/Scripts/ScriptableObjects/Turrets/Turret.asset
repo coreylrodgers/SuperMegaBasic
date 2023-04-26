@@ -15,4 +15,9 @@ MonoBehaviour:
   nameString: Turret
   buildingName: 0
   prefab: {fileID: 4957347017579803320, guid: 19fe55bec64ba344ebf0438669b265b1, type: 3}
+  projectile: {fileID: 319151235, guid: 4ea9b4b4aec6cc440849719c7e7f4c01, type: 3}
   sprite: {fileID: 21300000, guid: 9af14858b62ab77408be9aeb2506492c, type: 3}
+  range: 5
+  reloadSpeed: 1
+  fov: 45
+  scanSpeed: 80

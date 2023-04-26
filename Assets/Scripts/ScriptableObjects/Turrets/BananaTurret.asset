@@ -15,4 +15,9 @@ MonoBehaviour:
   nameString: Banana Turret
   buildingName: 2
   prefab: {fileID: 5131073818636559689, guid: 613801d407f684e4e938e83c6559cb7c, type: 3}
+  projectile: {fileID: 319151235, guid: e6c0ef10c40598a438c928e23d3318c7, type: 3}
   sprite: {fileID: 21300000, guid: 87acbfaa440a7774c900bf402b08bf98, type: 3}
+  range: 5
+  reloadSpeed: 0.5
+  fov: 90
+  scanSpeed: 80

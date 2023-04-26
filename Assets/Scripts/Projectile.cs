@@ -39,7 +39,6 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         // Deal Damage to enemy
         if(collision.gameObject.TryGetComponent<Enemy>(out Enemy enemyComponent)) {
-            Debug.Log(collision + " enemy");
             enemyComponent.TakeDamage(damageAmount);
         }
 

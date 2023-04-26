@@ -15,4 +15,9 @@ MonoBehaviour:
   nameString: Ninja Turret
   buildingName: 1
   prefab: {fileID: 7788244665694972795, guid: eca17827b34e9d94b81b5634bd7b2746, type: 3}
+  projectile: {fileID: 319151235, guid: 58ec420d6435aea4185446c6427771c6, type: 3}
   sprite: {fileID: 21300000, guid: dbbd00ce8b3e7ca42a95f2cea25a6e7a, type: 3}
+  range: 5
+  reloadSpeed: 1
+  fov: 180
+  scanSpeed: 90

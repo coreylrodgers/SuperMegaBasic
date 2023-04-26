@@ -6,6 +6,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public static event Action<Enemy> OnEnemyKilled;
+    [SerializeField] float movementSpeed;
     [SerializeField] float health, maxHealth = 3f;
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.position += new Vector3(movementSpeed * Time.deltaTime , 0, 0);
+    
         
     }
     public void TakeDamage(float damageAmount) {
