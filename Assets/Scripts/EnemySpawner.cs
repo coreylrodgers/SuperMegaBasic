@@ -8,7 +8,19 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float timeBetweenSpawns;
     [SerializeField] float maxSpawnOffset;
     EnemyWaveSO enemyWave;
+    private void OnEnable()
+    {
+        Enemy.OnEnemyAttack += HandleEnemyAttack;
+    }
+    private void OnDisable()
+    {
+        Enemy.OnEnemyAttack -= HandleEnemyAttack;
+    }
 
+    void HandleEnemyAttack(Enemy enemy) {
+        SpawnEnemy(enemy);
+    }
+    
     private void Start()
     {
         enemyWave = GameManager.Instance.GetActiveWave();
@@ -20,10 +32,14 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(SpawnEnemies());
     }
 
+    public void SpawnEnemy(Enemy newEnemyToSpawn) {
+        Vector2 spawnPos = transform.position + new Vector3(0,Random.Range(0,maxSpawnOffset));
+        Instantiate(newEnemyToSpawn, spawnPos, Quaternion.identity);
+    }
+
 
     IEnumerator SpawnEnemies()
     {
-
         for(int i = 0; i < enemyWave.enemyMax; i++)
         {
             Vector2 spawnPos = transform.position + new Vector3(0,Random.Range(0,maxSpawnOffset));
