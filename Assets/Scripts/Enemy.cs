@@ -7,19 +7,17 @@ public class Enemy : MonoBehaviour
 {
     public static event Action<Enemy> OnEnemyKilled;
     public static event Action<Enemy> OnEnemyAttack;
-    [SerializeField] float movementSpeed;
-    [SerializeField] float health, maxHealth = 3f;
-    [SerializeField] int damage = 1;
-    // Start is called before the first frame update
+
+    [SerializeField] EnemySO enemySO;
+    float health;
     void Start()
     {
-        health = maxHealth;
+        health = enemySO.health;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.position += new Vector3(movementSpeed * Time.deltaTime , 0, 0);
+        transform.position += new Vector3(enemySO.speed * Time.deltaTime, 0, 0);
         if(transform.position.x > 10) {
             DealDamage();
             OnEnemyAttack?.Invoke(this);
@@ -34,7 +32,7 @@ public class Enemy : MonoBehaviour
         }
     }
     public void DealDamage() {
-        GameManager.Instance.TakeDamage(damage);
+        GameManager.Instance.TakeDamage(enemySO.damage);
     }
 
 }

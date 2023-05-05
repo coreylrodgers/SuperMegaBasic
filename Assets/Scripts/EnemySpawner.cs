@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] Enemy enemyToSpawn;
+    [SerializeField] EnemySO enemyToSpawn;
     [SerializeField] float timeBetweenSpawns;
     [SerializeField] float maxSpawnOffset;
     EnemyWaveSO enemyWave;
@@ -43,7 +43,7 @@ public class EnemySpawner : MonoBehaviour
         for(int i = 0; i < enemyWave.enemyMax; i++)
         {
             Vector2 spawnPos = transform.position + new Vector3(0,Random.Range(0,maxSpawnOffset));
-            Instantiate(enemyToSpawn, spawnPos, Quaternion.identity);
+            Instantiate(enemyToSpawn.pf, spawnPos, Quaternion.identity);
             yield return new WaitForSeconds(timeBetweenSpawns);
 
         }

@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
 
+    // Events
+    public static event Action OnPlayerDeath;
+
+
     [SerializeField] int health;
     [SerializeField] bool gameOver;
     [SerializeField] int maxHealth = 5;
@@ -36,6 +40,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         activeWave = enemyWaveList.list[0];
+        Time.timeScale = 1;
         enemiesLeft = activeWave.enemyMax;
         UpdateEnemiesLeftText();
         UpdateHealthLeftText();
@@ -66,7 +71,7 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         Time.timeScale = 0;
-        _SceneManager.Instance.ShowGameOverScene();
+        OnPlayerDeath?.Invoke();
     }
 
     public void TakeDamage(int damageAmount)

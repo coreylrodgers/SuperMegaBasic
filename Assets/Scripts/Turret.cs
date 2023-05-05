@@ -20,12 +20,6 @@ public class Turret : MonoBehaviour
         buildingType = GetComponent<BuildingTypeHolder>().buildingType;
 
     }
-    private void Start()
-    {
-        // Set the defaults depening on building type
-        
-    }
-
     void OnDrawGizmos()
     {
         Gizmos.DrawRay(cannonTransform.position, cannonTransform.up);
@@ -75,8 +69,8 @@ public class Turret : MonoBehaviour
         //Find the muzzle of the turret
         Transform muzzle = transform.Find("cannon").Find("muzzle");
         // Instantiate bullet pf from projectile transform point
-        Debug.Log(muzzle);
-        Projectile bullet = Instantiate(buildingType.projectile, muzzle).GetComponent<Projectile>();
+        Projectile bullet = Instantiate(buildingType.projectile, muzzle.position, transform.rotation).GetComponent<Projectile>();
+        // Remove parent
 
         if(bullet == null) {
             Debug.Log("No projectile found");
