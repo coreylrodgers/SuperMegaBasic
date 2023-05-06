@@ -15,12 +15,10 @@ public class BuildingManager : MonoBehaviour
     {
         public BuildingTypeSO activeBuildingType;
     }
-    private Grid topPlacement;
-    private Grid bottomPlacement;
-
     //Members
     BuildingTypeListSO buildingTypeList;
     BuildingTypeSO activeBuildingType;
+    [SerializeField] GridItem activeGridItem;
     Dictionary<BuildingTypeSO.BuildingName, BuildingTypeSO> buildingNameDictionary;
 
     private void Awake()
@@ -32,10 +30,6 @@ public class BuildingManager : MonoBehaviour
     }
     private void Start()
     {
-        //Create placement grids 
-        topPlacement = new Grid(16, 2, 1f, new Vector3(-8.5f, 2.5f), "top");
-        bottomPlacement = new Grid(16, 2, 1f, new Vector3(-8.5f, -4), "bottom");
-
         // Add buildingTypes to dictionary
         foreach (BuildingTypeSO bt in buildingTypeList.list)
         {
@@ -45,40 +39,32 @@ public class BuildingManager : MonoBehaviour
     public void SetActiveBuildingType(BuildingTypeSO buildingType)
     {
         activeBuildingType = buildingType;
-        // Fire off event for other classes to use
         OnActiveBuildingTypeChanged?.Invoke(this, new OnActiveBuildingTypeChangedEventArgs { activeBuildingType = activeBuildingType });
     }
 
-    private void SetBuildingGrid(GameObject pf, Grid buildingGrid) {
-            pf.GetComponent<GridHolder>().grid = topPlacement;
-            Grid grid = pf.GetComponent<GridHolder>().grid;
-            grid = buildingGrid;
-            grid.SetGridTileOccupied(UtilsClass.GetMouseWorldPosition());
-    }
+
     private void CreateBuilding(BuildingTypeSO buildingType)
     {
-        // If on grid get grid name
-        int top = topPlacement.GetValue(UtilsClass.GetMouseWorldPosition());
-        int btm = bottomPlacement.GetValue(UtilsClass.GetMouseWorldPosition());
-        if (top == 0)
-        {
-            GameObject pf = Instantiate(buildingType.prefab, topPlacement.GetWorldPlacementPosition(UtilsClass.GetMouseWorldPosition()), Quaternion.identity);
-            SetBuildingGrid(pf, topPlacement);
-            pf.transform.Rotate(new Vector3(0,0, 180));
-        }
-        else if (btm == 0)
-        {
-            // Place in bottom
-            GameObject pf = Instantiate(buildingType.prefab, bottomPlacement.GetWorldPlacementPosition(UtilsClass.GetMouseWorldPosition()), Quaternion.identity);
-            SetBuildingGrid(pf, bottomPlacement);
+        GridItem activeGridItem = GridManager.Instance.GetActiveGridItem();
+
+        if (GridManager.Instance.GetActiveGridItem() != null && !activeGridItem.GetGrid().IsGridTileOccupied()) {
+            GameObject building = Instantiate(buildingType.prefab, activeGridItem.GetGrid().GetWorldPlacementPosition(UtilsClass.GetMouseWorldPosition()), Quaternion.identity);
+            AssignGridToBuilding(building);
+            building.gameObject.transform.Rotate(activeGridItem.GetRotation());
         }
 
+    }
+
+    private void AssignGridToBuilding(GameObject building)
+    {
+        GridItem gridToAssign = GridManager.Instance.GetActiveGridItem();
+        building.GetComponent<GridHolder>().grid = gridToAssign.GetGrid();
+        gridToAssign.GetGrid().SetGridTileOccupied(UtilsClass.GetMouseWorldPosition());
     }
 
     private void Update()
     {
 
-        //Manage Selection Using the Number Keys
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             Debug.Log("Selecting standard");
@@ -103,6 +89,7 @@ public class BuildingManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            Debug.Log("Click");
             CreateBuilding(activeBuildingType);
         }
     }

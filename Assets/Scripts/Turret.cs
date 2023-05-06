@@ -65,12 +65,10 @@ public class Turret : MonoBehaviour
     private void Fire()
     {
         hasTarget = true;
-        Debug.Log("Firing");
         //Find the muzzle of the turret
         Transform muzzle = transform.Find("cannon").Find("muzzle");
         // Instantiate bullet pf from projectile transform point
         Projectile bullet = Instantiate(buildingType.projectile, muzzle.position, transform.rotation).GetComponent<Projectile>();
-        // Remove parent
 
         if(bullet == null) {
             Debug.Log("No projectile found");
