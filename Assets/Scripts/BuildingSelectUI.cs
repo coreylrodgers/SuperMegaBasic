@@ -64,7 +64,7 @@ public class BuildingSelectUI : MonoBehaviour
         // Subscribe to event in Building manager 
         BuildingManager.Instance.OnActiveBuildingTypeChanged += BuildingManager_OnActiveBuildingTypeChanged;
 
-        // Update the Sactive building type button here on first run
+        // Update the active building type button here on first run
         UpdateActiveBuildingTypeButton();
     }
 

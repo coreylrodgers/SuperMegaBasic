@@ -19,7 +19,6 @@ public class MousePointer : MonoBehaviour
         // get position of mouse
         float y = Input.mousePosition.y;
         float x = Input.mousePosition.x;
-
         this.transform.position = GetMouseWorldPosition();
     }
 
