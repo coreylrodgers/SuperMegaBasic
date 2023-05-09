@@ -32,8 +32,13 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(SpawnEnemies());
     }
 
+    void OnDrawGizmos() {
+        Debug.DrawLine(transform.position, transform.position + new Vector3(0, maxSpawnOffset, 0));
+        Debug.DrawLine(transform.position, transform.position + new Vector3(0, -maxSpawnOffset, 0));
+    }
+
     public void SpawnEnemy(Enemy newEnemyToSpawn) {
-        Vector2 spawnPos = transform.position + new Vector3(0,Random.Range(0,maxSpawnOffset));
+        Vector2 spawnPos = transform.position + new Vector3(0,Random.Range(-maxSpawnOffset,maxSpawnOffset));
         Instantiate(newEnemyToSpawn, spawnPos, Quaternion.identity);
     }
 

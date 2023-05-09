@@ -217,6 +217,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea8e06f4e425fa544b96d8d24da8c4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 183
   projectileSpeed: 400
   projectileLifetime: 1
 --- !u!114 &-8858107156078894415
@@ -245,10 +248,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid:
+    name: 
     width: 0
     height: 0
     cellSize: 0
-    name: 
     originPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &4981111655840432479
 GameObject:

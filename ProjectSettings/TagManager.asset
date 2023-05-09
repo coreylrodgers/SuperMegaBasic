@@ -12,8 +12,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Grid
+  - Game
   - 
   - 
   - 
@@ -44,4 +44,7 @@ TagManager:
     locked: 0
   - name: Top
     uniqueID: 2854125765
+    locked: 0
+  - name: 
+    uniqueID: 4203626417
     locked: 0

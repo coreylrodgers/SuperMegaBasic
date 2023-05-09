@@ -7,6 +7,7 @@ public class Turret : MonoBehaviour
 
     BuildingTypeSO buildingType;
     Transform cannonTransform;
+    [SerializeField] LayerMask layerMask;
     [SerializeField] float projectileSpeed = 5f;
     [SerializeField] float projectileLifetime = 0.5f;
     private Vector3 turretDirection;
@@ -34,16 +35,19 @@ public class Turret : MonoBehaviour
         }
         if (cannonTransform != null)
         {
-            RaycastHit2D hit = Physics2D.Raycast(cannonTransform.position, cannonTransform.up);
+            RaycastHit2D hit = Physics2D.Raycast(cannonTransform.position, cannonTransform.up, 5f, layerMask);
+
 
             if (hit.collider != null)
             {
-                
+                Debug.Log(hit.collider);
+
                 //check distance to enemy 
                 bool isInRange = hit.distance < buildingType.range;
 
                 // No target if not in range
-                if(!isInRange) {
+                if (!isInRange)
+                {
                     hasTarget = false;
                 }
                 if (hit.collider.gameObject.tag == "Enemy" && isInRange)
@@ -70,10 +74,11 @@ public class Turret : MonoBehaviour
         // Instantiate bullet pf from projectile transform point
         Projectile bullet = Instantiate(buildingType.projectile, muzzle.position, transform.rotation).GetComponent<Projectile>();
 
-        if(bullet == null) {
+        if (bullet == null)
+        {
             Debug.Log("No projectile found");
         }
-    
+
         // Add force in direction of the cannonTransform up vector
         bullet.GetComponent<Rigidbody2D>().AddForce(cannonTransform.up * projectileSpeed);
         // Destroy after specified lifetime
@@ -81,7 +86,7 @@ public class Turret : MonoBehaviour
         //reload 
         reloadTimer += buildingType.reloadSpeed;
         isReloading = true;
-        
+
     }
 
     private void Update()
